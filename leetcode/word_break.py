@@ -24,6 +24,9 @@ One might wonder. Is it sufficient to guarantee correctedness?
 This could be rephrased as, is there a chance to build a True value even if the substring at the end is not valid?
 
 Is it possible S is valid splitting at i, even if S[i:] is false? No
+
+Complexity:
+O(n)
 """
 
 class Solution:
