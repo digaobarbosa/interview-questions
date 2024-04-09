@@ -21,7 +21,7 @@ class Solution:
         if node is None:
             return None
         r = Node(node.val)
-        memory[id(node)] = r
+        memory[id(node)] = r # gotcha, the memory has to be filled before calling the recursion. Or it can loop forever
         r.next = self.rec(memory,node.next)
         r.random = self.rec(memory, node.random)
         return r
