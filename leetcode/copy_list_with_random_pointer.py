@@ -9,7 +9,9 @@ class Node:
         self.next = next
         self.random = random
 
-"""We can understand as a recursive solution with memorization so that we dont end up in a infinite loop."""
+"""We can understand as a recursive solution with memorization so that we dont end up in a infinite loop.
+O(n) in time complexity as it goes through all the nodes and at most N random nodes.
+memory also O(n) as is needed for a deep copy anyway"""
 
 class Solution:
 
