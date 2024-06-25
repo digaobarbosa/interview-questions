@@ -5,17 +5,21 @@ import heapq
 
 class MedianFinder:
     def __init__(self):
-        self.heap = []
+        self.top = []
+        self.bottom = []
+
 
     def addNum(self, num: int) -> None:
-        heapq.heappush(self.heap, num)
+        heapq.heappush(self.bottom, -num)
+        heapq.heappush(self.top, -1*heapq.heappop(self.bottom))
+        if len(self.top) > len(self.bottom):
+            heapq.heappush(self.bottom, -1*heapq.heappop(self.top))
 
     def findMedian(self) -> float:
-        if len(self.heap) % 2 == 1:
-            return heapq.nsmallest(len(self.heap) // 2+1, self.heap)[-1]
+        if (len(self.top) + len(self.bottom)) % 2 == 0:
+            return (self.bottom[0]*-1 + self.top[0])/2
         else:
-            a = heapq.nsmallest(max(len(self.heap) // 2+1,2), self.heap)
-            return (a[-1] + a[-2]) / 2
+            return self.bottom[0] * -1
 
 
 def test(calls, args):
