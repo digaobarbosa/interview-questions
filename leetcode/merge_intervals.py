@@ -1,7 +1,7 @@
 # https://leetcode.com/problems/merge-intervals/description/?envType=study-plan-v2&envId=top-interview-150
 
 from typing import *
-class Solution:
+class Solution2:
     """
     The idea here is to sort the list first. Than we can keep track of the current result's interval we are creating.
     We keep cur_start,cur_end as the interval to be added on the result.
@@ -28,6 +28,31 @@ class Solution:
         result.append([cur_start,cur_end])
         return result
 
+
+class Solution:
+    """
+    The idea here is to sort the list first. Than we can keep track of the current result's interval we are creating.
+    We keep cur_start,cur_end as the interval to be added on the result.
+    And while we walk through the sorted list, we guarantee that we will only have intersection if the
+    start of the item is below or the same the cur_end of the interval. If it's above, it makes us
+    start a new interval for the result.
+    """
+    def merge(self, intervals: List[List[int]]) -> List[List[int]]:
+        intervals.sort(key=lambda x: x[0])
+        res = []
+        last = None
+        for i in range(len(intervals)):
+            it = intervals[i]
+            if last is None:
+                res.append(it)
+                last = it
+            elif last[1] < it[0]:
+                res.append(it)
+                last = it
+            elif last[1] >= it[0]:
+                last[0] = min(it[0],last[0])
+                last[1] = max(it[1],last[1])
+        return res
 
 
 
